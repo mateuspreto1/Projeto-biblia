@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Salmos</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+</head>
+<body>
+    <div class="conteudo">
+        <h1 id="referencia">Salmos</h1>
+        <p id="texto" style="margin-bottom: 20px; font-size: 24px;"></p>
+        <button onclick="proximoSalmo()">Próximo Salmo</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+            
+    <script type="text/javascript">
+        var idSalmo;
+        window.onload = getSalmoAPI();
+
+        function getSalmoAPI(salmo) {
+            if (salmo == undefined) {
+                salmo = getSalmo();
+            }
+
+            idSalmo = salmo;
+
+            url = 'https://bible-api.com/salmo+' + parseInt(idSalmo) + ':1?translation=almeida';
+            //Consulta o salmo no Web Service bible-api
+            $.getJSON(url, function(dados) {
+                if (!("error" in dados)) {
+                    $("#referencia").text(dados.reference);
+                    $("#texto").text(dados.text);
+                }
+                else {
+                    alert("Salmo não encontrado");
+                }
+            });
+        };
+
+        // Em um mês, é possível ler todos os salmos da Biblia. Depende da hora e do dia que você visita a página
+        function getSalmo() {
+            var hoje = new Date();
+            qtdHorasMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate() * 24;
+            qtdHorasPassou = ((hoje.getDate() - 1) * 24) + hoje.getHours();
+            salmo = (qtdHorasPassou / qtdHorasMes) * 150;
+            return salmo;
+        }
+
+        function proximoSalmo() {
+            if (idSalmo == 150) {
+                idSalmo = 1;
+            } else {
+                idSalmo++;
+            }
+
+            getSalmoAPI(idSalmo);
+        }
+    
+    </script>
+</body>
+
+</html>

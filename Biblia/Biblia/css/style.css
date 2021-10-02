@@ -1,0 +1,30 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+    background-image: url("../img/fundo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.conteudo {
+    padding-top: 10px;
+    padding-left: 10px;
+    min-height: 98.9%;
+    font-size: 20px;
+    font-family: 'Cloister Black';
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.botao {
+    font-size: 50px;
+}
+
+.imagem-pokemon {
+    width: 20%;
+    margin-left: 50px;
+}
+
+@font-face {
+    font-family: 'Cloister Black';
+    src: url('../font/CloisterBlack.ttf')  format('truetype')
+  }
